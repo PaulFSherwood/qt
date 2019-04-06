@@ -1,0 +1,12 @@
+Compile.txt
+===========
+
+
+1) type "qmake"
+2) type "make"
+
+to run the game:
+type "./Space-Invaders-Remixed" if on Parallel03
+
+
+Thank you. Hope you enjoy. 
