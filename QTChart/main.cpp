@@ -38,9 +38,12 @@
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 
+#include <QSplineSeries>
 #include <QThread>
+#include <QTimer>
 #include <qglobal.h>
 #include <time.h>
+#include "chart.h"
 
 QT_CHARTS_USE_NAMESPACE
 
@@ -101,12 +104,6 @@ int main(int argc, char *argv[])
     series->append(5, 25);
     series->append(6, 34);
 
-    QThread::msleep(100);
-    int randNum = rand()%(42-16 + 1) + 16;
-
-    series->append(counter, randNum);
-    counter += 1;
-
     QChart *chart = new QChart();
     chart->legend()->hide();
     chart->addSeries(series);
@@ -138,8 +135,6 @@ int main(int argc, char *argv[])
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-
-
     // Create the main app window
     QMainWindow window;
 
@@ -147,6 +142,5 @@ int main(int argc, char *argv[])
     window.setCentralWidget(chartView);
     window.resize(800, 600);
     window.show();
-
     return a.exec();
 }
