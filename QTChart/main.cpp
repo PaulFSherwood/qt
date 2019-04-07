@@ -38,10 +38,15 @@
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 
+#include <QThread>
+#include <qglobal.h>
+#include <time.h>
+
 QT_CHARTS_USE_NAMESPACE
 
 int main(int argc, char *argv[])
 {
+    int counter = 7;
     QApplication a(argc, argv);
 
 //    // Assign names to the set of bars used
@@ -96,6 +101,12 @@ int main(int argc, char *argv[])
     series->append(5, 25);
     series->append(6, 34);
 
+    QThread::msleep(100);
+    int randNum = rand()%(42-16 + 1) + 16;
+
+    series->append(counter, randNum);
+    counter += 1;
+
     QChart *chart = new QChart();
     chart->legend()->hide();
     chart->addSeries(series);
@@ -104,7 +115,7 @@ int main(int argc, char *argv[])
     QFont font;
     font.setPixelSize(18);
     chart->setTitleFont(font);
-    chart->setTitleBrush(QBrush(Qt::black));
+    chart->setTitleBrush(QBrush(Qt::green));
     chart->setTitle("Barry bonds HRs as Pirate");
 
     QPen pen(QRgb(0x000000));
@@ -121,6 +132,7 @@ int main(int argc, char *argv[])
     axisX->append("1990",4);
     axisX->append("1991",5);
     axisX->append("1992",6);
+    axisX->append("date", counter);
     chart->setAxisX(axisX, series);
 
     QChartView *chartView = new QChartView(chart);
